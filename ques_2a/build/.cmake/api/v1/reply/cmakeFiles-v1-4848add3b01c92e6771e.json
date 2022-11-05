@@ -229,6 +229,22 @@
 		},
 		{
 			"isExternal" : true,
+			"path" : "/home/trent/trent-workspace/ECNG3006-LAB2/.git/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/trent/esp/ESP8266_RTOS_SDK/tools/cmake/third_party/GetGitRevisionDescription.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/git-data/grabRef.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/trent/trent-workspace/ECNG3006-LAB2/.git/refs/heads/main"
+		},
+		{
+			"isExternal" : true,
 			"path" : "/home/trent/esp/ESP8266_RTOS_SDK/tools/kconfig_new/config.env.in"
 		},
 		{

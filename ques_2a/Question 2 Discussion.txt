@@ -1,0 +1,163 @@
+When addressing system performance, the following criteria is assessed:
+1. Task priority inversion - Priority inversion is a occurs when a high priority task is indirectly preempted by a low priority task. 
+2. All task meet their deadlines  
+3. Jitter - he amount of error in the timing of a task over subsequent iterations of a program or loop 
+4. Utitization - This is the system utilization by each task.
+
+For this discussion, the variation in performance for questions 2a and 2b are assessed and the expectation of operation is addressed.
+
+Question 2a uses round robin scheduling. In this case, all priorities are set as the same value.
+Round-robin scheduling - Round Robin is a CPU scheduling algorithm where each process is assigned a fixed time slot in a cyclic way. It is basically the preemptive version of First come First Serve CPU Scheduling algorithm. (Source: https://www.geeksforgeeks.org/program-round-robin-scheduling-set-1/)
+
+Question 2b uses priority inheritance. 
+Priority inheritance: involves boosting the priority of a task holding a lock to that of any other (higher priority) task that tries to take the lock (Source: https://www.digikey.com/en/maker/projects/introduction-to-rtos-solution-to-part-11-priority-inversion/abf4b8f7cd4a4c70bece35678d178321)
+
+Hence using the number of tasks as 3, the values 3! = 6 was used to identify the number of combinations. Thus the priorities were varied 6 times as seen below:
+
+task 1 - gpio_on
+task 2 - gpio_off
+task 3 - status_msg
+
+Arrangements of 3 = 3! thus 6 possible arrangements
+   	
+.1 = (Task 1 -> Task 2 -> Task 3)
+   	
+    xTaskCreate(gpio_on, "gpio_on", 2042, NULL, PRIORITY_HIGH, NULL);
+    xTaskCreate(gpio_off, "gpio_off", 2042, NULL, PRIORITY_MID, NULL);
+    xTaskCreate(status_msg, "status_msg", 2042, NULL, PRIORITY_LOW, NULL);
+	       	
+.2 = (Task 1 -> Task 3 -> Task 2)
+   	
+    xTaskCreate(gpio_on, "gpio_on", 2042, NULL, PRIORITY_HIGH, NULL);
+    xTaskCreate(gpio_off, "gpio_off", 2042, NULL, PRIORITY_LOW, NULL);
+    xTaskCreate(status_msg, "status_msg", 2042, NULL, PRIORITY_MID, NULL);
+	      	
+.3 = (Task 2 -> Task 1 -> Task 3)
+   	
+    xTaskCreate(gpio_on, "gpio_on", 2042, NULL, PRIORITY_MID, NULL);
+    xTaskCreate(gpio_off, "gpio_off", 2042, NULL, PRIORITY_HIGH, NULL);
+    xTaskCreate(status_msg, "status_msg", 2042, NULL, PRIORITY_LOW, NULL);
+	   	
+.4 = (Task 2 -> Task 3 -> Task 1)
+  	
+    xTaskCreate(gpio_on, "gpio_on", 2042, NULL, PRIORITY_LOW, NULL);
+    xTaskCreate(gpio_off, "gpio_off", 2042, NULL, PRIORITY_HIGH, NULL);
+    xTaskCreate(status_msg, "status_msg", 2042, NULL, PRIORITY_MID, NULL);
+	   	
+.5 = (Task 3 -> Task 1 -> Task 2)
+   	
+    xTaskCreate(gpio_on, "gpio_on", 2042, NULL, PRIORITY_MID, NULL);
+    xTaskCreate(gpio_off, "gpio_off", 2042, NULL, PRIORITY_LOW, NULL);
+    xTaskCreate(status_msg, "status_msg", 2042, NULL, PRIORITY_HIGH, NULL);
+	       	
+.6 = (Task 3 -> Task 2 -> Task 1)
+   	
+    xTaskCreate(gpio_on, "gpio_on", 2042, NULL, PRIORITY_LOW, NULL);
+    xTaskCreate(gpio_off, "gpio_off", 2042, NULL, PRIORITY_MID, NULL);
+    xTaskCreate(status_msg, "status_msg", 2042, NULL, PRIORITY_HIGH, NULL);
+
+The performance of each is given below:
+Question 1 runtime stats:
+*******************************************************
+Task            Abs Time       %Time 
+**************************************
+uiT            	14174		2
+gpio_off       	4923		<1
+IDLE           	0		    <1
+status_msg     	1198		<1
+gpio_on        	505207		73
+Tmr Svc        	151561		22
+*******************************************************
+
+Question 2a:
+*******************************************************
+Task            Abs Time       %Time 
+**************************************
+uiT            	15351		8
+gpio_on        	241		   <1
+IDLE           	0		   <1
+gpio_off       	37		   <1
+status_msg     	62		   <1
+Tmr Svc        	151579		87
+*******************************************************
+
+Question 2b.1:
+*******************************************************
+Task            Abs Time       %Time 
+**************************************
+uiT            	14134		1
+status_msg     	0		    <1
+IDLE           	0		    <1
+gpio_off       	496846		42
+gpio_on        	504945		43
+Tmr Svc        	151557		12
+*******************************************************
+
+Question 2b.2:
+*******************************************************
+Task            Abs Time       %Time 
+**************************************
+uiT            	14169		2
+gpio_off       	5181		<1
+IDLE           	0		    <1
+status_msg     	1202		<1
+gpio_on        	504946		74
+Tmr Svc        	151557		22
+*******************************************************
+
+Question 2b.3:
+*******************************************************
+Task            Abs Time       %Time 
+**************************************
+uiT            	14130		 1
+status_msg     	0		    <1
+IDLE           	0		    <1
+gpio_off       	501589		42
+gpio_on        	504945		43
+Tmr Svc        	151557		12
+*******************************************************
+
+Question 2b.4:
+*******************************************************
+Task            Abs Time       %Time 
+**************************************
+uiT            	14174		2
+gpio_on        	15243		2
+IDLE           	0		    <1
+status_msg     	1202		<1
+gpio_off       	504886		73
+Tmr Svc        	151557		22
+*******************************************************
+
+Question 2b.5:
+*******************************************************
+Task            Abs Time       %Time 
+**************************************
+uiT            	14179		2
+gpio_off       	5177		<1
+IDLE           	0		    <1
+status_msg     	1202		<1
+gpio_on        	504944		74
+Tmr Svc        	151557		22
+*******************************************************
+
+Question 2b.6:
+*******************************************************
+Task            Abs Time       %Time 
+**************************************
+uiT            	14174		2
+gpio_on        	15243		2
+IDLE           	0		    <1
+status_msg     	1202		<1
+gpio_off       	504886		73
+Tmr Svc        	151557		22
+*******************************************************
+
+Discussion:
+
+[Consideration of cpu utilization and jitter] 
+a. Round robin: It is observed that for the round robin scheduling, the Tmr Svc comprised of the largest percentage of time utilization. What was unexpected is the % time for gpio_on, gpio_off and status_msg was less that 1%. The comparable utilization however was expected given the definition of the scheduling, all task has even utilization amongst them. The task jitter is not considered that there was no defined baseline or expected outcome where they system was varied to identify change in task execution. 
+
+b. It can be observed that 2b.4 and 2b.6 have similar performance. 2b.2 and 2b.5 have similar performance. 2b.1 and 2b.3 have similar performance. For 2b.1 and 2b.3, it is observed that when gpio_offn and gpio_on inverted priorities, there was a similar output performance w.r.t. to the %time utilization. For 2b.2 and 2b.5, when gpio_off was set low, gpio_on had the highest percentage utilization. Similarly, this is seen in 2b.4 and 2b.6 where gpio_on has a low priority thus gpio_off had the highest percentahe utilization. Hence for the pairs observed, this is where priority inversion occurred as mentioned. There was no jitter observed and all the tasks executed.
+
+
