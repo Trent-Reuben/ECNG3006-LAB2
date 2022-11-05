@@ -1,0 +1,121 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2022.11.04 21:04:57 =~=~=~=~=~=~=~=~=~=~=~=
+
+ ets Jan  8 2013,rst cause:2, boot mode:(3,7)
+
+load 0x40100000, len 7036, room 16 
+tail 12
+chksum 0x42
+ho 0 tail 12 room 4
+load 0x3ffe8408, len 24, room 12 
+tail 12
+chksum 0xfb
+ho 0 tail 12 room 4
+load 0x3ffe8420, len 3324, room 12 
+tail 0
+chksum 0xc3
+csum 0xc3
+[0;32mI (48) boot: ESP-IDF v3.4-63-ga192988b 2nd stage bootloader[0m
+[0;32mI (49) boot: compile time 20:46:21[0m
+[0;32mI (49) boot: SPI Speed      : 40MHz[0m
+[0;32mI (55) boot: SPI Mode       : DIO[0m
+[0;32mI (61) boot: SPI Flash Size : 1MB[0m
+[0;32mI (67) boot: Partition Table:[0m
+[0;32mI (73) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (84) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (96) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (107) boot:  2 factory          factory app      00 00 00010000 000f0000[0m
+[0;32mI (119) boot: End of partition table[0m
+[0;32mI (125) esp_image: segment 0: paddr=0x00010010 vaddr=0x40210010 size=0x167b8 ( 92088) map[0m
+[0;32mI (177) esp_image: segment 1: paddr=0x000267d0 vaddr=0x402267c8 size=0x05a38 ( 23096) map[0m
+[0;32mI (187) esp_image: segment 2: paddr=0x0002c210 vaddr=0x3ffe8000 size=0x003dc (   988) load[0m
+[0;32mI (188) esp_image: segment 3: paddr=0x0002c5f4 vaddr=0x40100000 size=0x00080 (   128) load[0m
+[0;32mI (202) esp_image: segment 4: paddr=0x0002c67c vaddr=0x40100080 size=0x04590 ( 17808) load[0m
+[0;32mI (222) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (243) gpio: GPIO[2]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (245) Task: gpio_on: Setting GPIO2 high
+[0m
+0.5s active wait complete. 
+[0;32mI (750) main: GPIO_2 Pin STATUS: 1
+[0m
+[0;32mI (751) Task: gpio_off: Setting GPIO2 low
+[0m
+Task            Abs Time       %Time 
+**************************************
+uiT            	13822		2
+gpio_off       	5650		<1
+IDLE           	0		<1
+status_msg     	1145		<1
+gpio_on        	504771		74
+Tmr Svc        	151650		22
+[0;32mI (787) main: Going to sleep for 0.5s. 
+[0m
+0.5s active wait complete. 
+[0;32mI (1290) main: Going to sleep for 0.5s. 
+[0m
+[0;32mI (1791) main: GPIO_2 Pin STATUS: 0
+[0m
+[0;32mI (1792) Task: gpio_on: Setting GPIO2 high
+[0m
+0.5s active wait complete. 
+[0;32mI (2293) Task: gpio_off: Setting GPIO2 low
+[0m
+[0;32mI (2301) main: Going to sleep for 0.5s. 
+[0m
+[0;32mI (2803) main: GPIO_2 Pin STATUS: 0
+[0m
+0.5s active wait complete. 
+[0;32mI (2804) main: Going to sleep for 0.5s. 
+[0m
+[0;32mI (3305) Task: gpio_on: Setting GPIO2 high
+[0m
+[0;32mI (3805) main: GPIO_2 Pin STATUS: 1
+[0m
+0.5s active wait complete. 
+[0;32mI (3806) Task: gpio_off: Setting GPIO2 low
+[0m
+[0;32mI (3815) main: Going to sleep for 0.5s. 
+[0m
+0.5s active wait complete. 
+[0;32mI (4317) main: Going to sleep for 0.5s. 
+[0m
+[0;32mI (4818) main: GPIO_2 Pin STATUS: 0
+[0m
+[0;32mI (4819) Task: gpio_on: Setting GPIO2 high
+[0m
+0.5s active wait complete. 
+[0;32mI (5320) Task: gpio_off: Setting GPIO2 low
+[0m
+[0;32mI (5328) main: Going to sleep for 0.5s. 
+[0m
+[0;32mI (5829) main: GPIO_2 Pin STATUS: 0
+[0m
+0.5s active wait complete. 
+[0;32mI (5830) main: Going to sleep for 0.5s. 
+[0m
+[0;32mI (6332) Task: gpio_on: Setting GPIO2 high
+[0m
+[0;32mI (6832) main: GPIO_2 Pin STATUS: 1
+[0m
+0.5s active wait complete. 
+[0;32mI (6833) Task: gpio_off: Setting GPIO2 low
+[0m
+[0;32mI (6842) main: Going to sleep for 0.5s. 
+[0m
+0.5s active wait complete. 
+[0;32mI (7343) main: Going to sleep for 0.5s. 
+[0m
+[0;32mI (7845) main: GPIO_2 Pin STATUS: 0
+[0m
+[0;32mI (7846) Task: gpio_on: Setting GPIO2 high
+[0m
+0.5s active wait complete. 
+[0;32mI (8347) Task: gpio_off: Setting GPIO2 low
+[0m
+[0;32mI (8355) main: Going to sleep for 0.5s. 
+[0m
+[0;32mI (8856) main: GPIO_2 Pin STATUS: 0
+[0m
+0.5s active wait complete. 
+[0;32mI (8857) main: Going to sleep for 0.5s. 
+[0m
+ 
