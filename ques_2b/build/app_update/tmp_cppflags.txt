@@ -1,1 +1,1 @@
-1 gpio v3.4-63-ga192988b
+debf302-dirty gpio v3.4-63-ga192988b
