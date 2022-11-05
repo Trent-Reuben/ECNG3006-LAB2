@@ -59,7 +59,7 @@ esp-idf/partition_table/CMakeFiles/partition_table: partition_table/partition-ta
 partition_table/partition-table.bin: /home/trent/esp/ESP8266_RTOS_SDK/components/partition_table/partitions_singleapp.csv
 partition_table/partition-table.bin: /home/trent/esp/ESP8266_RTOS_SDK/components/partition_table/gen_esp32part.py
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/trent/trent-workspace/ECNG3006-LAB2/ques_3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating ../../partition_table/partition-table.bin"
-	cd /home/trent/trent-workspace/ECNG3006-LAB2/ques_3/build/esp-idf/partition_table && python /home/trent/esp/ESP8266_RTOS_SDK/components/partition_table/gen_esp32part.py -q --offset 0x8000 --disable-md5sum --flash-size 2MB /home/trent/esp/ESP8266_RTOS_SDK/components/partition_table/partitions_singleapp.csv /home/trent/trent-workspace/ECNG3006-LAB2/ques_3/build/partition_table/partition-table.bin
+	cd /home/trent/trent-workspace/ECNG3006-LAB2/ques_3/build/esp-idf/partition_table && python /home/trent/esp/ESP8266_RTOS_SDK/components/partition_table/gen_esp32part.py -q --offset 0x8000 --disable-md5sum --flash-size 1MB /home/trent/esp/ESP8266_RTOS_SDK/components/partition_table/partitions_singleapp.csv /home/trent/trent-workspace/ECNG3006-LAB2/ques_3/build/partition_table/partition-table.bin
 
 partition_table: esp-idf/partition_table/CMakeFiles/partition_table
 partition_table: partition_table/partition-table.bin

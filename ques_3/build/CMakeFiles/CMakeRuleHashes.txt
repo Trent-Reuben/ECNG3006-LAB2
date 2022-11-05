@@ -1,5 +1,5 @@
 # Hashes of file build rules.
-225a977d3d0a9fdf49f4698dd62c5bf2 .bin_timestamp
+9f255cc52283284d8888a5f5fba15d2c .bin_timestamp
 17cc80f112038938abb7f7653f0e0a12 CMakeFiles/___idf_app_update
 17cc80f112038938abb7f7653f0e0a12 CMakeFiles/___idf_bootloader
 17cc80f112038938abb7f7653f0e0a12 CMakeFiles/___idf_bootloader_support
@@ -82,5 +82,5 @@ d214df0b599b3a30f4215816e2e70525 mconf-idf-prefix/src/mconf-idf-stamp/mconf-idf-
 9939fe01b2967793efecb6e0f6a121ad mconf-idf-prefix/src/mconf-idf-stamp/mconf-idf-mkdir
 e876bfdc2985ccf0927e250fc179ea1a mconf-idf-prefix/src/mconf-idf-stamp/mconf-idf-patch
 902ce391d4022b208d2ec3d55488dff6 mconf-idf-prefix/src/mconf-idf-stamp/mconf-idf-update
-2d3d17df29168c3b4a743a07f17331ed partition_table/partition-table.bin
+1d4fc848b6fb520ed7d612ddfab89057 partition_table/partition-table.bin
 8ddf2583b2b5e58c24d2ee839302dc92 project_elf_src.c

@@ -1,0 +1,85 @@
+When addressing system performance, the following criteria is assessed:
+1. Task priority inversion - Priority inversion is a occurs when a high priority task is indirectly preempted by a low priority task. 
+2. All task meet their deadlines  
+3. Jitter - he amount of error in the timing of a task over subsequent iterations of a program or loop 
+4. Utitization - This is the system utilization by each task.
+
+For this discussion, the runtime statistic of question 1 and question 3 are compared as well as the output log. The runtime statistic is compared as question 1 output is used as the baseline to assess jitter and utilization. Using the output log, it can be assessed whether the tasks met their deadlines (executed according to expectation) and if there was priority inversion. This is done given the priorities of the task were kept the same.
+
+Question 1 runtime stats:
+
+Task            Abs Time       %Time 
+**************************************
+uiT            	14174		2
+gpio_off       	4923		<1
+IDLE           	0		    <1
+status_msg     	1198		<1
+gpio_on        	505207		73
+Tmr Svc        	151561		22
+
+Question 1 log snippet:
+*******************************************************************
+Task: gpio_on: Setting GPIO2 high. 
+
+main: GPIO_2 Pin STATUS: 1
+
+0.5s active wait complete. 
+Task: gpio_off: Setting GPIO2 low. 
+
+0.5s active wait complete. 
+main: GPIO_2 Pin STATUS: 0
+
+Task: gpio_on: Setting GPIO2 high. 
+
+0.5s active wait complete. 
+*******************************************************************
+
+Question 3 runtime stats:
+
+Task            Abs Time       %Time 
+**************************************
+uiT            	13822		2
+gpio_off       	5650		<1
+IDLE           	0		    <1
+status_msg     	1145		<1
+gpio_on        	504771		74
+Tmr Svc        	151650		22
+
+Question 3 log snippet:
+*******************************************************************
+Task: gpio_on: Setting GPIO2 high
+
+main: GPIO_2 Pin STATUS: 1
+
+0.5s active wait complete. 
+Task: gpio_off: Setting GPIO2 low
+
+main: Going to sleep for 0.5s. 
+
+0.5s active wait complete. 
+main: Going to sleep for 0.5s. 
+
+main: GPIO_2 Pin STATUS: 0
+
+Task: gpio_on: Setting GPIO2 high
+
+0.5s active wait complete. 
+Task: gpio_off: Setting GPIO2 low
+*******************************************************************
+
+Discussion:
+
+References:
+Idle Hook task: 
+	https://www.freertos.org/RTOS-idle-task.html
+
+configIDLE_SHOULD_YIELD
+	https://www.freertos.org/a00110.html
+
+ESP system sleep modes API reference
+	https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-reference/system/sleep_modes.html?highlight=esp_sleep
+
+The idle hook task definition states the function is called during each cycle of the idle task. Thus an idle of 0.5s was experienced by the system as it performed. Within the “vApplicationIdleHook”, the wakeup by timer was enabled allowing for the used of “esp_light_sleep_start()” which made the system enter a light sleep due the configured wake up option ins “esp_sleep_enable_timer_wakeup”.
+
+The use of the processor sleep does affect the performance. This is observed when comparing the runtime statictics for question 1 and 3. Its is seen that the absolute times are within range to be considered negligible (eg. uiT(Q1) = 14174 vs uiT(Q3) = 13822) such that there was minimal jitter. The utilization was not affected with the only observable change being task "gpio_on" varying from 73% (Q1) to 74% (Q3).
+It was also observed that all task met their deadline. With regards to priority inversion of the tasks, there was a noticable difference in the outputs but this is due to the system noticfication of the system being put to sleep. As stated above, the idle hook executed when the systems experienced an idle thus "main: Going to sleep for 0.5s." was printed accordingly. With regards to the main task, i.e., gpio_off, gpio_on and status_msg, there was no apparent priority inversion when considering the priority of the tasks.

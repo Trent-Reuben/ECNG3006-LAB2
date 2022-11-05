@@ -58,7 +58,7 @@ CMakeFiles/gen_project_binary: .bin_timestamp
 
 .bin_timestamp: gpio.elf
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/trent/trent-workspace/ECNG3006-LAB2/ques_3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating binary image from built executable"
-	python /home/trent/esp/ESP8266_RTOS_SDK/components/esptool_py/esptool/esptool.py --chip esp8266 elf2image --flash_mode dio --flash_freq 40m --flash_size 2MB --version=3 -o /home/trent/trent-workspace/ECNG3006-LAB2/ques_3/build/gpio.bin gpio.elf
+	python /home/trent/esp/ESP8266_RTOS_SDK/components/esptool_py/esptool/esptool.py --chip esp8266 elf2image --flash_mode dio --flash_freq 40m --flash_size 1MB --version=3 -o /home/trent/trent-workspace/ECNG3006-LAB2/ques_3/build/gpio.bin gpio.elf
 	/usr/bin/cmake -E echo "Generated /home/trent/trent-workspace/ECNG3006-LAB2/ques_3/build/gpio.bin"
 	/usr/bin/cmake -E md5sum /home/trent/trent-workspace/ECNG3006-LAB2/ques_3/build/gpio.bin > /home/trent/trent-workspace/ECNG3006-LAB2/ques_3/build/.bin_timestamp
 
