@@ -1,10 +1,10 @@
-P1.  
+**P1.**
 For any project that you have already created, identify the following files and how changes in any one will POTENTIALLY affect the FreeRTOS configuration: 
 - /project/sdkconfig 
 - /project/build/include/sdkconfig.h 
 - /sdk/components/freertos/port/esp8266/include/freertos/FreeRTOSConfig.h 
 
-A1. 
+**A1.** 
 Using the ques_2 project from this lab (lab 2), the use of vTaskGetRunTimeStats requires the modification of all three files: 
 - two output files of the project, i.e., sdkconfig and sdkconfig.h  
 - one being FreeRTOSConfig.h which is a "system file" for freeRTOS to function with the SDK. 
@@ -22,16 +22,16 @@ With respect to the usage of the macros, the application of vTaskGetRunTimeStats
 
 The sdkconfig file houses the configurations for the SDK, i.e., the configurations for the esp. By default, in the Espressif IoT Development Framework Configuration (make menuconfig), the configurations for the runtime statistics are disabled (Component config -> FreeRTOS). When this is disabled, when attempting to use uxTaskGetSystemState for example, the error "undefined reference to `uxTaskGetSystemState'" is shown when compiling and hence the compilation fails. By enabling "FreeRTOS to collect run time stats", the "FreeRTOS trace facility" and "FreeRTOS stats formatting functions" is enabled. This adjusts the sdkconfig file which in turns modifies sdkconfig.h allowing for the collection of runtime statistics thus allowing the use of relevant runtime stats functions offered through FreeRTOS.  
 
-P2.  
+**P2.**  
 Identify the labels that must be #define'd and the functions that provide task performance information in the ESP SDK. 
  
-A2. 
+**A2.** 
 The main function that provides task performance in the ESP SDK is
 
 1. vTaskGetRunTimeStats (Uses the header file: task.h) (Source: 
 https://www.freertos.org/a00021.html#vTaskGetRunTimeStats) 
 
-(void vTaskGetRunTimeStats( char *pcWriteBuffer );) 
+	(void vTaskGetRunTimeStats( char *pcWriteBuffer );) 
 
 Source (https://www.freertos.org/rtos-run-time-stats.html) 
 
@@ -69,6 +69,7 @@ The steps for setting up vTaskGetRunTimeStats() are as follows:
 (Source: https://www.freertos.org/a00021.html#vTaskGetRunTimeStats) 
 
 1. Configure the following in FreeRtosConfig.h 
+
 	a. configGenerate_RUN_TIME_STATS is set to 1 
 
    	b. Ensure portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() function is included in the file 
