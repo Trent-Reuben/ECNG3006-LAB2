@@ -1,7 +1,7 @@
 When addressing system performance, the following criteria is assessed:
 1. Task priority inversion - Priority inversion is a occurs when a high priority task is indirectly preempted by a low priority task. 
 2. All task meet their deadlines  
-3. Jitter - he amount of error in the timing of a task over subsequent iterations of a program or loop 
+3. Jitter - the amount of error in the timing of a task over subsequent iterations of a program or loop 
 4. Utitization - This is the system utilization by each task.
 
 For this discussion, the variation in performance for questions 2a and 2b are assessed and the expectation of operation is addressed.
@@ -155,9 +155,39 @@ Tmr Svc        	151557		22
 
 Discussion:
 
-[Consideration of cpu utilization and jitter] 
-a. Round robin: It is observed that for the round robin scheduling, the Tmr Svc comprised of the largest percentage of time utilization. What was unexpected is the % time for gpio_on, gpio_off and status_msg was less that 1%. The comparable utilization however was expected given the definition of the scheduling, all task has even utilization amongst them. The task jitter is not considered that there was no defined baseline or expected outcome where they system was varied to identify change in task execution. 
+[Consideration of performance criteria] 
+a. Round robin:
 
-b. It can be observed that 2b.4 and 2b.6 have similar performance. 2b.2 and 2b.5 have similar performance. 2b.1 and 2b.3 have similar performance. For 2b.1 and 2b.3, it is observed that when gpio_offn and gpio_on inverted priorities, there was a similar output performance w.r.t. to the %time utilization. For 2b.2 and 2b.5, when gpio_off was set low, gpio_on had the highest percentage utilization. Similarly, this is seen in 2b.4 and 2b.6 where gpio_on has a low priority thus gpio_off had the highest percentahe utilization. Hence for the pairs observed, this is where priority inversion occurred as mentioned. There was no jitter observed and all the tasks executed.
+ It is observed that for the round robin scheduling, the "Tmr Svc" comprised of the largest percentage of time utilization and execution time. The % time for "gpio_on", "gpio_off" and "status_msg" was less that 1%. This was unexpected. The comparable utilization however was expected given the definition of round robin scheduling, where all task are given a time slice and executed in a cyclic manner. The task jitter is not considered that there was no defined baseline or expected output for the round robin scheduling. Three executions of the program presented the same runtime statistic. Based on this, there was no observed jitter when considering the absolute time. With respect to all task meeting their deadlines, based on the output file, all tasks executed fully. Since round robin scheduling make use of equal priority task, priority inversion does not occur. Given all tasks are of the same priority, the tasks in the ready queue are executed given they can and are executed in a cyclic manner. This is seen in the following:
+
+[0;32mI (3277) Task: gpio_on: Setting GPIO2 high
+[0m
+[0;32mI (3317) main: GPIO_2 Pin STATUS: 1
+[0m
+0.5s active wait complete. 
+[0;32mI (3787) Task: gpio_off: Setting GPIO2 low
+[0m
+0.5s active wait complete. 
+
+It is seen that the "status_msg" task executed at the beginning before the "gpio_off" despite being called after "gpio_on" in "app_main". This is due to the active wait where "gpio_off" has to wait for the  mutex to be released. This is seen where "gpio_off" executed after the active wait. However, when the mutex is released within execution time, the gpio_on/gpio_off task executes before the status_msg task. This is seen below.
+
+[0;32mI (4777) Task: gpio_on: Setting GPIO2 high
+[0m
+0.5s active wait complete. 
+[0;32mI (5287) Task: gpio_off: Setting GPIO2 low
+
+b. Priority Inheritance 
+
+General Observation: 
+- 2b.4 and 2b.6 have similar performance.
+In 2b.4 and 2b.6 where gpio_on has a low priority thus gpio_off had the highest percentage utilization. It is also noted that gpio_off had a high and mid priority between 2b.4 and 2b.6
+
+- 2b.2 and 2b.5 have similar performance. 
+For 2b.2 and 2b.5, when gpio_off was set low, gpio_on had the highest percentage utilization. It is also noted that gpio_on had a high and mid priority between 2b.2 and 2b.5
+
+- 2b.1 and 2b.3 have similar performance. 
+For 2b.1 and 2b.3, it is observed that when gpio_off and gpio_on inverted priorities, there was a similar output performance w.r.t. to the %time utilization.  
+
+
 
 
