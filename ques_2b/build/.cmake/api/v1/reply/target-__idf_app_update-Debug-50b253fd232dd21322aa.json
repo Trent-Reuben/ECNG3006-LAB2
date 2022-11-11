@@ -232,7 +232,7 @@
 			[
 				{
 					"backtrace" : 9,
-					"path" : "/home/trent/trent-workspace/ECNG3006-LAB2/ques_2a/build/config"
+					"path" : "/home/trent/trent-workspace/ECNG3006-LAB2/ques_2b/build/config"
 				},
 				{
 					"backtrace" : 10,
@@ -432,7 +432,7 @@
 				},
 				{
 					"backtrace" : 15,
-					"define" : "PROJECT_VER=\"e063176-dirty\""
+					"define" : "PROJECT_VER=\"e863ff8-dirty\""
 				},
 				{
 					"backtrace" : 2,
@@ -447,7 +447,7 @@
 			[
 				{
 					"backtrace" : 9,
-					"path" : "/home/trent/trent-workspace/ECNG3006-LAB2/ques_2a/build/config"
+					"path" : "/home/trent/trent-workspace/ECNG3006-LAB2/ques_2b/build/config"
 				},
 				{
 					"backtrace" : 10,

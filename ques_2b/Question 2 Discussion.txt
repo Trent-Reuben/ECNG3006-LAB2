@@ -192,4 +192,4 @@ Performance criteria.
 1. All tasks were executed hence all deadlines were met.
 2. The definition of jitter states "the amount of error in the timing of a task over subsequent iterations of a program or loop". Hence, jitter was not analysed for priority inheritance given changing the priorities affect the operation to be considered an a different form and not an iteration. There was also no statistics obtained for the looping of the program.
 3. The CPU utilization is discussed in "general observations" above.
-4. 
+4. It is expected that priority inversion would occur due to gpio_on or gpio_off preempting each other and status_msg would excecute while the mutex is held. This would occur when stat_msg is at lowest priority. In 2b.1 and 2b.3, it is observed from the output that the system behaves accordingly to the priorities of the programs. The remaining combinational priorities executed accordingly and there was no priority inversion occurring.
